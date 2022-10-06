@@ -57,6 +57,7 @@
     }
     
     #minute {
+        font-weight: bold;
         font-size: 30px;
         position:absolute; top:450px; left:60px; width:80px; height:40px;   
     }

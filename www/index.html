@@ -182,11 +182,18 @@
 
         }
 
+        //チクタク音の処理
+        var wavFunc = function wavTiku() {
+            var audio = new Audio();
+            audio.src = "tiku1.mp3";
+            audio.play();
+        }
+
         // ButtonAがクリックされた時の処理
         function btnAClick(e) {
             active = true;
             startTime = new Date();
-
+            currentTime = 0;
         }
 
         // ButtonBがクリックされた時の処理
@@ -206,6 +213,18 @@
 
 
         // 繰り返し実行する処理
+        function secRunFunc(func, t) {
+            if (currentTime == 0) {
+                currentTime = t;
+            
+            } else {
+                if (t - currentTime >= 1) {
+                    func();
+                    currentTime = t;
+                }
+            }
+        }
+
         function timer() {
             if (active) {
                 var time = parseInt((new Date() - startTime) / 1000);
@@ -217,6 +236,9 @@
                 if (rest <= 0) {
                     active = false;
                     alarm();
+                }
+                if (rest <= 7){
+                    secRunFunc(wavFunc,time);
                 }
 
             }
